@@ -1,0 +1,67 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+   <meta charset="utf-8" />
+   <script src='static/Chart.min.js'></script>
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron">
+        <h1 align="center">Temperature Chart </h1>
+  </div>
+  <canvas id="line-chart-all" ></canvas>
+  <form method="post" action="/chart">
+    <input type="submit" value="1 hours", name="time">
+    <input type="submit" value="2 hours", name="time">
+    <input type="submit" value="4 hours", name="time">
+    <input type="submit" value="All", name="time">
+  </form>
+
+</div> 
+<script>
+        new Chart(document.getElementById("line-chart-all"), {
+    type: 'line',
+    data: {
+   labels : [{% for item in bedroomLabels %}
+                  "{{item}}",
+              {% endfor %}],
+   datasets : [{
+            data : [{% for item in bedroomValues %}
+                      {{item}},
+                    {% endfor %}],
+            borderColor: "#3e95cd",
+            fill: false,
+            pointRadius: 0,
+            label: 'Bedroom'
+      },
+      {
+            data : [{% for item in balconyValues %}
+                      {{item}},
+                    {% endfor %}],
+            borderColor: "#8e5ea2",
+            fill: false,
+            pointRadius: 0,
+            label: 'Balcony'
+      },
+      {
+            data : [{% for item in kitchenValues %}
+                      {{item}},
+                    {% endfor %}],
+            borderColor: "#c45850",
+            fill: false,
+            pointRadius: 0,
+            label: 'Kitchen'
+      }]
+   },
+    options: {
+      title: {
+        display: true},
+      animation: { duration: 0 }
+    }
+  });
+</script>
+</body>
+
+{% endblock %}

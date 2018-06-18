@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+		<div class="jumbotron">
+		    <h1 align="center">Current Temperature Data</h1>
+	    </div>
+
+	    <div class="row">
+			<div class="col-sm-4" align="center">
+				<h1>Balcony</h1>
+				<h3>{{ balcony_temp}}℃</h3>
+				<h3>{{ balcony_hum }} %</h3>
+			</div>
+			<div class="col-sm-4" align="center">
+			  	<h1>Bedroom</h1>
+				<h3>{{ bedroom_temp}}℃</h3>
+				<h3>{{ bedroom_hum }} %</h3>
+		  	</div>
+		  	<div class="col-sm-4" align="center">
+		  		<h1>Kitchen</h1>
+				<h3>{{ kitchen_temp}}℃</h3>
+				<h3>{{ kitchen_hum }} %</h3>
+			</div>
+		</div>
+    </div>
+{% endblock %}
