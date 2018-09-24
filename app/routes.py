@@ -85,7 +85,6 @@ def chart():
     balcony_select_string = ''
     kitchen_select_string = ''
     bedroom_select_string = ''
-
     if request.method == 'POST':
         if "1 hours" in request.form['time']:
             balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-1 Hour')"
@@ -106,9 +105,9 @@ def chart():
         else:
             print("Unknown filed pushed")
     else:
-        balcony_select_string = "SELECT * FROM sensor_data WHERE device=135"
-        kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167"
-        bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151"
+        balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-24 Hour')"
+        kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-24 Hour')"
+        bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-24 Hour')"
 
     # DB call
     conn = sqlite3.connect('./sensor_reading/sensordata.db')
