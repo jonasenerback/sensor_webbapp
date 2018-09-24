@@ -1,27 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-		<div class="jumbotron">
-		    <h1 align="center">Current Temperature Data</h1>
-	    </div>
-
-	    <div class="row">
-			<div class="col-sm-4" align="center">
-				<h1>Balcony</h1>
-				<h3>{{ balcony_temp}}℃</h3>
-				<h3>{{ balcony_hum }} %</h3>
-			</div>
-			<div class="col-sm-4" align="center">
-			  	<h1>Bedroom</h1>
-				<h3>{{ bedroom_temp}}℃</h3>
-				<h3>{{ bedroom_hum }} %</h3>
-		  	</div>
-		  	<div class="col-sm-4" align="center">
-		  		<h1>Kitchen</h1>
-				<h3>{{ kitchen_temp}}℃</h3>
-				<h3>{{ kitchen_hum }} %</h3>
-			</div>
-		</div>
-    </div>
+  <div class="container">
+    <h2>Current sensor data</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sensor</th>
+          <th>Temperature</th>
+          <th>Max Temperature</th>
+          <th>Min Temperature</th>
+          <th>Humidity</th>
+          <th>Max Humidity</th>
+          <th>Min Humidity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Balcony</td>
+          <td>{{ balcony_temp}} ℃</td>
+          <td>{{ max_temps[0]}} ℃</td>
+          <td>{{ min_temps[0]}} ℃</td>
+          <td>{{ balcony_hum}} %</td>
+          <td>{{ max_hums[0]}} %</td>
+          <td>{{ min_hums[0]}} %</td>
+        </tr>
+        <tr>
+          <td>Bedroom</td>
+          <td>{{ bedroom_temp}} ℃</td>
+          <td>{{ max_temps[1]}} ℃</td>
+          <td>{{ min_temps[1]}} ℃</td>
+          <td>{{ bedroom_hum}} %</td>
+          <td>{{ max_hums[1]}} %</td>
+          <td>{{ min_hums[1]}} %</td>
+        </tr>
+        <tr>
+          <td>Kitchen</td>
+          <td>{{ kitchen_temp}} ℃</td>
+          <td>{{ max_temps[2]}} ℃</td>
+          <td>{{ min_temps[2]}} ℃</td>
+          <td>{{ kitchen_hum}} %</td>
+          <td>{{ max_hums[2]}} %</td>
+          <td>{{ min_hums[2]}} %</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
