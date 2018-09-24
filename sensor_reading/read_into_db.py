@@ -35,16 +35,11 @@ try:
 					print("Uknown device id: {}".format(dev_id))
 		conn.commit()
 		print("New data detected")
-		time.sleep(60)
+		time.sleep(60*10)
+		# New data every 10 minutes
 except Exception as e:
 	print("Exceptition")
 	print(e)
 
 
 conn.close()
-
-
-
-
-
-
