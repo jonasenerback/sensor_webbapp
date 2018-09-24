@@ -13,8 +13,8 @@ core = TelldusCore()
 conn = sqlite3.connect('sensordata.db')
 curs = conn.cursor()
 
-try:
-	while (True):
+while (True):
+	try:
 		list_sensors = core.sensors()
 		print(len(list_sensors))
 		if list_sensors is not None:
@@ -36,9 +36,9 @@ try:
 		conn.commit()
 		print("New data detected")
 		time.sleep(60)
-except Exception as e:
-	print("Exceptition")
-	print(e)
+	except Exception as e:
+		print("Exceptition")
+		print(e)
 
 
 conn.close()
