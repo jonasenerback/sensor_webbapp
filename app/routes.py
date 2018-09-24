@@ -68,10 +68,13 @@ def index():
 @app.route("/chart", methods=['GET', 'POST'])
 def chart():
     balconyTempList = []
+    balconyHumList = []
     balconyTimeList = []
     kitchenTempList = []
+    kitchenHumList = []
     kitchenTimeList = []
     bedroomTempList = []
+    bedroomHumList = []
     bedroomTimeList = []
     balconyData = []
     kitchenData = []
@@ -122,14 +125,18 @@ def chart():
 
     # Parse data to fit template
     for data in balconyData:
-        balconyTempList.append(data[1])
         balconyTimeList.append(data[0])
+        balconyTempList.append(data[1])
+        balconyHumList.append(data[2])
     for data in kitchenData:
-        kitchenTempList.append(data[1])
         kitchenTimeList.append(data[0])
+        kitchenTempList.append(data[1])
+        kitchenHumList.append(data[2])
     for data in bedroomData:
-        bedroomTempList.append(data[1])
         bedroomTimeList.append(data[0])
-    return render_template('chart.html', balconyValues=balconyTempList, balconyLabels=balconyTimeList,
-        kitchenValues=kitchenTempList, kitchenLabels=kitchenTimeList,
-        bedroomValues=bedroomTempList, bedroomLabels=bedroomTimeList, legend=legend)
+        bedroomTempList.append(data[1])
+        bedroomHumList.append(data[2])
+    return render_template('chart.html', balconyTempValues=balconyTempList,balconyHumValues=balconyHumList, balconyLabels=balconyTimeList,
+        kitchenTempValues=kitchenTempList,kitchenHumValues = kitchenHumList, kitchenLabels=kitchenTimeList,
+        bedroomTempValues=bedroomTempList, bedroomHumValues = bedroomHumList, bedroomLabels=bedroomTimeList,
+        legend=legend)
