@@ -10,7 +10,7 @@ KTICHEN = 167
 offset_bedroom = 0.5
 
 core = TelldusCore()
-conn = sqlite3.connect('sensordata.db')
+conn = sqlite3.connect('/home/pi/projects/sensor_webbapp/sensor_reading/sensordata.db')
 curs = conn.cursor()
 
 while (True):
