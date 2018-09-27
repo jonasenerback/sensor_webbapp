@@ -83,7 +83,8 @@ def chart():
     stepSize = 1
 
     # setup db connection
-    conn = sqlite3.connect('./sensor_reading/sensordata.db')
+    #conn = sqlite3.connect('./sensor_reading/sensordata.db')
+    conn = sqlite3.connect('/home/pi/projects/sensor_webbapp/sensor_reading/sensordata.db')
     curs = conn.cursor()
 
     balcony_select_string = ''
@@ -117,7 +118,8 @@ def chart():
         bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-24 Hour')"
 
     # DB call
-    conn = sqlite3.connect('./sensor_reading/sensordata.db')
+    #conn = sqlite3.connect('./sensor_reading/sensordata.db')
+    conn = sqlite3.connect('/home/pi/projects/sensor_webbapp/sensor_reading/sensordata.db')
     curs = conn.cursor()
     curs.execute(balcony_select_string)
     balconyData = (curs.fetchall())
