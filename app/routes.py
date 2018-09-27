@@ -12,7 +12,8 @@ KTICHEN = 167
 @app.route('/')
 @app.route('/index')
 def index():
-    conn = sqlite3.connect('./sensor_reading/sensordata.db')
+    #conn = sqlite3.connect('./sensor_reading/sensordata.db')
+    conn = sqlite3.connect('/home/pi/projects/sensor_webbapp/sensor_reading/sensordata.db')
     curs = conn.cursor()
     curs.execute("SELECT * FROM sensor_data WHERE device=135 ORDER BY timestamp DESC LIMIT 1")
     balconyData = (curs.fetchall())
