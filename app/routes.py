@@ -80,6 +80,7 @@ def chart():
     kitchenData = []
     bedroomData = []
     legend = 'Monthly Data'
+    stepSize = 1
 
     # setup db connection
     conn = sqlite3.connect('./sensor_reading/sensordata.db')
@@ -89,18 +90,21 @@ def chart():
     kitchen_select_string = ''
     bedroom_select_string = ''
     if request.method == 'POST':
-        if "1 hours" in request.form['time']:
-            balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-1 Hour')"
-            kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-1 Hour')"
-            bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-1 Hour')"
-        elif "2 hours" in request.form['time']:
-            balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-2 Hour')"
-            kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-2 Hour')"
-            bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-2 Hour')"
-        elif "4 hours" in request.form['time']:
-            balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-4 Hour')"
-            kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-4 Hour')"
-            bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-4 Hour')"
+        if "1 day" in request.form['time']:
+            balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-1 Day')"
+            kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-1 Day')"
+            bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-1 Day')"
+            stepSize = 1
+        elif "2 days" in request.form['time']:
+            balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-2 Days')"
+            kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-2 Days')"
+            bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-2 Days')"
+            stepSize = 2
+        elif "4 days" in request.form['time']:
+            balcony_select_string = "SELECT * FROM sensor_data WHERE device=135 AND datetime(timestamp) >=datetime('now', '-4 Days')"
+            kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167 AND datetime(timestamp) >=datetime('now', '-4 Days')"
+            bedroom_select_string = "SELECT * FROM sensor_data WHERE device=151 AND datetime(timestamp) >=datetime('now', '-4 Days')"
+            stepSize = 4
         elif "All" in request.form['time']:
             balcony_select_string = "SELECT * FROM sensor_data WHERE device=135"
             kitchen_select_string = "SELECT * FROM sensor_data WHERE device=167"
@@ -138,5 +142,5 @@ def chart():
         bedroomHumList.append(data[2])
     return render_template('chart.html', balconyTempValues=balconyTempList,balconyHumValues=balconyHumList, balconyLabels=balconyTimeList,
         kitchenTempValues=kitchenTempList,kitchenHumValues = kitchenHumList, kitchenLabels=kitchenTimeList,
-        bedroomTempValues=bedroomTempList, bedroomHumValues = bedroomHumList, bedroomLabels=bedroomTimeList,
+        bedroomTempValues=bedroomTempList, bedroomHumValues = bedroomHumList, bedroomLabels=bedroomTimeList, stepSize = stepSize,
         legend=legend)

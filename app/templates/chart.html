@@ -18,11 +18,12 @@
   </div>
   <canvas id="line-chart-Humidity" ></canvas>
   <form method="post" action="/chart">
-    <input type="submit" value="1 hours", name="time">
-    <input type="submit" value="2 hours", name="time">
-    <input type="submit" value="4 hours", name="time">
+    <input type="submit" value="1 day", name="time", id="test">
+    <input type="submit" value="2 days", name="time">
+    <input type="submit" value="4 days", name="time">
     <input type="submit" value="All", name="time">
   </form>
+
 
 </div>
 <script>
@@ -57,6 +58,7 @@
   Chart.defaults.global.elements.line.fill = false;
   Chart.defaults.global.animation.duration = 0;
 
+
   <!-- Temperature chart -->
   new Chart(document.getElementById("line-chart-Temperature"), {
     type: 'scatter',
@@ -85,8 +87,11 @@
             type: 'time',
             time: {
                 parser: "YYYYMMDD",
-                unit: 'day',
-                unitStepSize: 1
+                unit: 'hour',
+                displayFormats: {
+                  hour: 'MMDD:hh:mm a'
+                },
+                unitStepSize: {{ stepSize }}
             }
         }]
       }
@@ -121,9 +126,12 @@
         xAxes: [{
             type: 'time',
             time: {
-                parser: "YYYYMMDD",
-                unit: 'day',
-                unitStepSize: 1
+              parser: "YYYYMMDD",
+              unit: 'hour',
+              displayFormats: {
+                hour: 'MMDD:hh:mm a'
+              },
+              unitStepSize: {{ stepSize }}
             }
         }]
       }
